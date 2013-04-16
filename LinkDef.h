@@ -18,5 +18,5 @@
 #pragma link C++ nestedtypedef;
 
 //classes
-#pragma link C++ class ROOT::R::TRinside;
+#pragma link C++ class ROOT::R::TRInterface;
 #endif
