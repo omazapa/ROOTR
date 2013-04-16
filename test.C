@@ -1,6 +1,6 @@
 void test()
 {
-gSystem->Load("libTRInterface.so");
+gSystem->Load("libRInterface.so");
 TArrayD v(3);
 v[0]=0;
 v[1]=1;
