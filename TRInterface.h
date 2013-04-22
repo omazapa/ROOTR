@@ -30,17 +30,15 @@ namespace Rcpp
 namespace ROOT
 {
   namespace R{
-    class TRInterface:public TObject
+    class TRInterface:public RInside,public TObject
     {
-    private:
-      RInside *R;
     public:
       TRInterface(const int argc, const char *const argv[], const bool loadRcpp=false, const bool verbose=true, const bool interactive=false);
-      ~TRInterface(){if(R)delete R;}
+      ~TRInterface(){}
       void parseEvalQ(std::string code);
       template<typename T >void assign(const T &obj,const std::string & name);
       
-      ClassDef(TRInterface, 1) // 
+      ClassDef(TRInterface, 0) // 
     };
     template<> void TRInterface::assign(const TArrayD &obj,const std::string & name);
   }
