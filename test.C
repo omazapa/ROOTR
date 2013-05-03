@@ -13,7 +13,6 @@ r.assign(TString("ROOTR"),"str");
 r.parseEvalQ("cat(v)");
 r.parseEvalQ("summary(v)");
 r.parseEvalQ("v<-2*v");
-r.parseEvalQ("version");
 
 robj=r.parseEval("str");
 TString str=robj.toString();
