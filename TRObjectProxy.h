@@ -38,6 +38,7 @@ namespace ROOT
 	private:
 	    Rcpp::RObject x;
 	public:
+	    TRObjectProxy(){};
 	    TRObjectProxy(SEXP xx);
 
 	    TString toString();
