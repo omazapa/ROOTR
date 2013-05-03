@@ -9,33 +9,19 @@
 *                                                                        *
 * For the list of contributors see $ROOTSYS/README/CREDITS.              *
 *************************************************************************/
-#include<TRInterface.h>
+#include<TRObjectProxy.h>
 #include<vector>
 using namespace ROOT::R;
-ClassImp(TRInterface)
-TRInterface::TRInterface(const int argc, const char *const argv[], const bool loadRcpp, const bool verbose, const bool interactive):RInside(argc,argv,loadRcpp,verbose,interactive)
+ClassImp(TRObjectProxy)
+
+TRObjectProxy::TRObjectProxy(SEXP xx): x(xx) { }
+
+TString TRObjectProxy::toString()
 {
+  return TString(::Rcpp::as<std::string>(x));
 }
 
-void TRInterface::parseEvalQ(std::string code)
+template <> TRObjectProxy::operator TString()
 {
-  RInside::parseEvalQ(code);
+  return TString(::Rcpp::as<std::string>(x));
 }
-
-TRObjectProxy TRInterface::parseEval(const std::string &line)
-{
-  return TRObjectProxy((SEXP)RInside::parseEval(line));
-}
-
-template<> void TRInterface::assign(const TArrayD &obj,const std::string & name)
-{
-  std::vector<double> vec(obj.GetArray(),obj.GetArray()+obj.GetSize());
-  RInside::assign(vec,name);
-}
-
-template<> void TRInterface::assign(const TString &obj,const std::string & name)
-{
-  std::string str(obj.Data());
-  RInside::assign(str,name);
-}
-

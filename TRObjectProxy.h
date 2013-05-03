@@ -9,47 +9,48 @@
 *                                                                        *
 * For the list of contributors see $ROOTSYS/README/CREDITS.              *
 *************************************************************************/
-#ifndef __TRInterface_H__
-#define __TRInterface_H__
+#ifndef __TRObjectProxy_H__
+#define __TRObjectProxy_H__
 #include<Rtypes.h>
 #include<TObject.h>
+#include<TString.h>
 #include<string>
 #include<TArrayD.h>
-#include<TRObjectProxy.h>
+
 #ifndef __CINT__
 #include <RInside.h>
 #include <Rcpp.h>
 #include<string>
 #else
 class RInside;
+class RInside::Proxy;
 namespace Rcpp
 {
- class InternalFunction;
+ class RObject; 
 }
+//internal R objects (at R api) Rinternals.h 
+typedef struct SEXPREC *SEXP;
 #endif
 #include<TObject.h>
 namespace ROOT
 {
   namespace R{
-    class TRInterface:public RInside,public TObject
-    {
-    public:
-      TRInterface(const int argc, const char *const argv[], const bool loadRcpp=false, const bool verbose=true, const bool interactive=false);
-      ~TRInterface(){}
-      void parseEvalQ(std::string code);
-      TRObjectProxy parseEval(const std::string &line); // parse line, return TRObjectProxy
-      template<typename T >void assign(const T &obj,const std::string & name);
-      
-      ClassDef(TRInterface, 0) // 
-    };
-    template<> void TRInterface::assign(const TArrayD &obj,const std::string & name);
-    template<> void TRInterface::assign(const TString &obj,const std::string & name);
+        class TRObjectProxy:public TObject {
+	private:
+	    Rcpp::RObject x;
+	public:
+	    TRObjectProxy(SEXP xx);
 
+	    TString toString();  
+	    template <typename T> operator T() {
+			return ::Rcpp::as<T>(x);
+	    }
+         ClassDef(TRObjectProxy, 0) // 
+	};
+	    template <> TRObjectProxy::operator TString();
+        
   }
 }
 
-#ifndef __CINT__
-
-#endif
 
 #endif
