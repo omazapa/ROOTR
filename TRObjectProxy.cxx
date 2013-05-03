@@ -21,6 +21,13 @@ TString TRObjectProxy::toString()
   return TString(::Rcpp::as<std::string>(x));
 }
 
+TVectorD TRObjectProxy::toVectorD()
+{
+  std::vector<double> vec=::Rcpp::as<std::vector<double> >(x);
+  return TVectorD(vec.size(),vec.data());
+}
+
+
 template <> TRObjectProxy::operator TString()
 {
   return TString(::Rcpp::as<std::string>(x));

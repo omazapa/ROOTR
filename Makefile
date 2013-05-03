@@ -1,5 +1,5 @@
 CFLAGS= -fPIC -I. -I/usr/share/R/include -I/usr/local/lib/R/site-library/Rcpp/include -I/usr/local/lib/R/site-library/RInside/include/ -I$(ROOTSYS)/include
-LDFLAGS= -shared -L/usr/lib/R/lib -L/usr/local/lib/R/site-library/RInside/lib/ -L$(ROOTSYS)/lib -lR -lRInside -lCore -lCint 
+LDFLAGS= -shared -L/usr/lib/R/lib -L/usr/local/lib/R/site-library/RInside/lib/ -L$(ROOTSYS)/lib -lR -lRInside -lCore -lCint -lMatrix
 
 
 all:cint libRInterface.so

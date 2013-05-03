@@ -15,8 +15,7 @@
 #include<TObject.h>
 #include<TString.h>
 #include<string>
-#include<TArrayD.h>
-
+#include<TVectorD.h>
 #ifndef __CINT__
 #include <RInside.h>
 #include <Rcpp.h>
@@ -41,14 +40,15 @@ namespace ROOT
 	public:
 	    TRObjectProxy(SEXP xx);
 
-	    TString toString();  
+	    TString toString();
+	    TVectorD toVectorD();
+	    
 	    template <typename T> operator T() {
 			return ::Rcpp::as<T>(x);
 	    }
          ClassDef(TRObjectProxy, 0) // 
 	};
-	    template <> TRObjectProxy::operator TString();
-        
+	    template<> TRObjectProxy::operator TString();        
   }
 }
 
