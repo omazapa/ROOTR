@@ -15,6 +15,7 @@
 #include<TObject.h>
 #include<string>
 #include<TArrayD.h>
+#include<TMatrixD.h>
 #include<TRObjectProxy.h>
 #ifndef __CINT__
 #include <RInside.h>
@@ -43,6 +44,7 @@ namespace ROOT
       ClassDef(TRInterface, 0) // 
     };
     template<> void TRInterface::assign(const TArrayD &obj,const std::string & name);
+    template<> void TRInterface::assign(const TMatrixD &obj,const std::string & name);
     template<> void TRInterface::assign(const TString &obj,const std::string & name);
 
   }

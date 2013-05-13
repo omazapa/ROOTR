@@ -39,3 +39,18 @@ template<> void TRInterface::assign(const TString &obj,const std::string & name)
   RInside::assign(str,name);
 }
 
+template<> void TRInterface::assign(const TMatrixD &obj,const std::string & name)
+{
+  Int_t rows=obj.GetNrows();
+  Int_t cols=obj.GetNcols();
+  Double_t *data=new Double_t[rows*cols];
+//   obj.GetMatrix2Array(data,"F"); //ROOT have a bug here
+//   TMatrixD m(obj.GetNrows(),obj.GetNcols(),data,"F");
+//   m.Print();
+  for(int i=0;i<rows;i++)
+  {  
+      for(int j=0;j<cols;j++) data[i+j*rows]=obj[i][j];
+  }
+  Rcpp::NumericMatrix mat(obj.GetNrows(),obj.GetNcols(),data);
+  RInside::assign(mat,name);
+}
