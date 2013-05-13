@@ -20,4 +20,12 @@
 //classes
 #pragma link C++ class ROOT::R::TRInterface;
 #pragma link C++ class ROOT::R::TRObjectProxy;
+
+#pragma link C++ function  ROOT::R::TRObjectProxy::toVector<Double_t>();
+#pragma link C++ function  ROOT::R::TRObjectProxy::toVector<Float_t>();
+
+#pragma link C++ function  ROOT::R::TRObjectProxy::toArray<TArrayD,Double_t>();
+#pragma link C++ function  ROOT::R::TRObjectProxy::toArray<TArrayF,Float_t>();
+#pragma link C++ function  ROOT::R::TRObjectProxy::toArray<TArrayI,Int_t>();
+
 #endif

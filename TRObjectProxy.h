@@ -15,7 +15,10 @@
 #include<TObject.h>
 #include<TString.h>
 #include<string>
-#include<TVectorD.h>
+#include<TVectorT.h>
+#include<TArrayD.h>
+#include<TArrayF.h>
+#include<TArrayI.h>
 #ifndef __CINT__
 #include <RInside.h>
 #include <Rcpp.h>
@@ -42,15 +45,31 @@ namespace ROOT
 	    TRObjectProxy(SEXP xx);
 
 	    TString toString();
-	    TVectorD toVectorD();
+	    template<class Type> TVectorT<Type> toVector();
+	    template<class TypeClass,class TypeData> TypeClass   toArray();
 	    
 	    template <typename T> operator T() {
-			return ::Rcpp::as<T>(x);
+                      return ::Rcpp::as<T>(x);
 	    }
          ClassDef(TRObjectProxy, 0) // 
 	};
-	    template<> TRObjectProxy::operator TString();        
+
   }
+#ifndef __CINT__
+template<class Type> TVectorT<Type> ROOT::R::TRObjectProxy::toVector()
+{
+  std::vector<Type> vec=::Rcpp::as<std::vector<Type> >(x);
+  return TVectorT<Type>(vec.size(),vec.data());
+}
+
+template<class TypeClass,class TypeData> TypeClass   ROOT::R::TRObjectProxy::toArray()
+{
+  std::vector<TypeData> vec=::Rcpp::as<std::vector<TypeData> >(x);
+  return TypeClass(vec.size(),vec.data());
+}
+
+#endif
+  
 }
 
 

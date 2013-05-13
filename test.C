@@ -18,11 +18,13 @@ robj=r.parseEval("str");
 TString str=robj.toString();
 
 robj=r.parseEval("v");
-TVectorD vout=robj.toVectorD();
+TVectorD vout=robj.toVector();
+TArrayD aout=robj.toArray();
 
 cout<<"---\n";
 cout<<str.Data()<<endl;
 cout<<"---\n";
 cout<<"["<<vout[0]<<","<<vout[1]<<","<<vout[2]<<"]"<<endl;
+cout<<"["<<aout[0]<<","<<aout[1]<<","<<aout[2]<<"]"<<endl;
 cout<<"---\n";
 }

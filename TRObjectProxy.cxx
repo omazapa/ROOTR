@@ -21,14 +21,26 @@ TString TRObjectProxy::toString()
   return TString(::Rcpp::as<std::string>(x));
 }
 
-TVectorD TRObjectProxy::toVectorD()
-{
-  std::vector<double> vec=::Rcpp::as<std::vector<double> >(x);
-  return TVectorD(vec.size(),vec.data());
-}
+// template<> TArrayD   TRObjectProxy::toArray()
+// {
+//   std::vector<Double_t> vec=::Rcpp::as<std::vector<Double_t> >(x);
+//   return TArrayD(vec.size(),vec.data());
+// }
+// 
+// template<> TArrayF   TRObjectProxy::toArray()
+// {
+//   std::vector<Float_t> vec=::Rcpp::as<std::vector<Float_t> >(x);
+//   return TArrayF(vec.size(),vec.data());
+// }
+// 
+// template<> TArrayI   TRObjectProxy::toArray()
+// {
+//   std::vector<Int_t> vec=::Rcpp::as<std::vector<Int_t> >(x);
+//   return TArrayI(vec.size(),vec.data());
+// }
+// 
 
-
-template <> TRObjectProxy::operator TString()
-{
-  return TString(::Rcpp::as<std::string>(x));
-}
+// template <> TRObjectProxy::operator TString()
+// {
+//   return TString(::Rcpp::as<std::string>(x));
+// }
