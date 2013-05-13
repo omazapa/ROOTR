@@ -28,4 +28,6 @@
 #pragma link C++ function  ROOT::R::TRObjectProxy::toArray<TArrayF,Float_t>();
 #pragma link C++ function  ROOT::R::TRObjectProxy::toArray<TArrayI,Int_t>();
 
+#pragma link C++ function  ROOT::R::TRObjectProxy::toMatrix<Double_t>();
+
 #endif

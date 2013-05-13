@@ -16,6 +16,7 @@
 #include<TString.h>
 #include<string>
 #include<TVectorT.h>
+#include<TMatrixT.h>
 #include<TArrayD.h>
 #include<TArrayF.h>
 #include<TArrayI.h>
@@ -28,7 +29,8 @@ class RInside;
 class RInside::Proxy;
 namespace Rcpp
 {
- class RObject; 
+ class RObject;
+ class NumericMatrix;
 }
 //internal R objects (at R api) Rinternals.h 
 typedef struct SEXPREC *SEXP;
@@ -47,7 +49,7 @@ namespace ROOT
 	    TString toString();
 	    template<class Type> TVectorT<Type> toVector();
 	    template<class TypeClass,class TypeData> TypeClass   toArray();
-	    
+	    template<class Type> TMatrixT<Type>   toMatrix();
 	    template <typename T> operator T() {
                       return ::Rcpp::as<T>(x);
 	    }
@@ -67,6 +69,14 @@ template<class TypeClass,class TypeData> TypeClass   ROOT::R::TRObjectProxy::toA
   std::vector<TypeData> vec=::Rcpp::as<std::vector<TypeData> >(x);
   return TypeClass(vec.size(),vec.data());
 }
+
+template<class Type> TMatrixT<Type>   ROOT::R::TRObjectProxy::toMatrix()
+{
+  Rcpp::NumericMatrix mat=::Rcpp::as<Rcpp::NumericMatrix>(x);
+  return TMatrixT<Type>(mat.nrow(),mat.ncol(),mat.begin(),"F");
+}
+
+
 
 #endif
   
