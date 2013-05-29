@@ -47,6 +47,7 @@ namespace ROOT
 	    TRObjectProxy(SEXP xx);
 
 	    TString toString();
+	    template<class Type> Type toScalar();
 	    template<class Type> TVectorT<Type> toVector();
 	    template<class TypeClass,class TypeData> TypeClass   toArray();
 	    template<class Type> TMatrixT<Type>   toMatrix();
@@ -75,8 +76,6 @@ template<class Type> TMatrixT<Type>   ROOT::R::TRObjectProxy::toMatrix()
   Rcpp::NumericMatrix mat=::Rcpp::as<Rcpp::NumericMatrix>(x);
   return TMatrixT<Type>(mat.nrow(),mat.ncol(),mat.begin(),"F");
 }
-
-
 
 #endif
   

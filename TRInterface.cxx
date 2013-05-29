@@ -16,10 +16,9 @@ ClassImp(TRInterface)
 TRInterface::TRInterface(const int argc, const char *const argv[], const bool loadRcpp, const bool verbose, const bool interactive):RInside(argc,argv,loadRcpp,verbose,interactive)
 {
 }
-
-void TRInterface::parseEvalQ(std::string code)
+void TRInterface::parseEvalQ(TString code)
 {
-  RInside::parseEvalQ(code);
+  RInside::parseEvalQ((std::string)code);
 }
 
 TRObjectProxy TRInterface::parseEval(const std::string &line)
@@ -33,24 +32,54 @@ template<> void TRInterface::assign(const TArrayD &obj,const std::string & name)
   RInside::assign(vec,name);
 }
 
+
+template<> void TRInterface::assign(const TVectorD &obj,const std::string & name)
+{
+  std::vector<double> vec(obj.GetMatrixArray(),obj.GetMatrixArray()+obj.GetNoElements());
+  RInside::assign(vec,name);
+}
+
 template<> void TRInterface::assign(const TString &obj,const std::string & name)
 {
   std::string str(obj.Data());
   RInside::assign(str,name);
 }
 
+
 template<> void TRInterface::assign(const TMatrixD &obj,const std::string & name)
 {
   Int_t rows=obj.GetNrows();
   Int_t cols=obj.GetNcols();
   Double_t *data=new Double_t[rows*cols];
-//   obj.GetMatrix2Array(data,"F"); //ROOT have a bug here
-//   TMatrixD m(obj.GetNrows(),obj.GetNcols(),data,"F");
-//   m.Print();
-  for(int i=0;i<rows;i++)
-  {  
-      for(int j=0;j<cols;j++) data[i+j*rows]=obj[i][j];
-  }
+  obj.GetMatrix2Array(data,"F"); //ROOT have a bug here(Fixed)
+  TMatrixD m(obj.GetNrows(),obj.GetNcols(),data,"F");
   Rcpp::NumericMatrix mat(obj.GetNrows(),obj.GetNcols(),data);
   RInside::assign(mat,name);
 }
+
+template<> void TRInterface::assign(const Double_t &value,const std::string & name)
+{
+  RInside::assign(value,name);
+}
+
+template<> void TRInterface::assign(const Int_t &value,const std::string & name)
+{
+  RInside::assign(value,name);  
+}
+
+void TRInterface::plot(TString code)
+{
+  RInside::parseEvalQ((std::string)TString("plot("+code+")"));
+}
+
+void TRInterface::lines(TString code)
+{
+  RInside::parseEvalQ((std::string)TString("lines("+code+")"));
+}
+
+void TRInterface::text(TString code)
+{
+  RInside::parseEvalQ((std::string)TString("text("+code+")"));
+}
+
+

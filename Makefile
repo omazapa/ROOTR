@@ -12,6 +12,9 @@ cint:
 	rootcint -f TRCint.cxx -c $(CFLAGS) TRObjectProxy.h TRInterface.h LinkDef.h
 
 run:
+#	LD_LIBRARY_PATH=$LD_LIBRARY_PATH:/usr/local/lib/R/site-library/RInside/lib/ root -l -q function.C
 	LD_LIBRARY_PATH=$LD_LIBRARY_PATH:/usr/local/lib/R/site-library/RInside/lib/ root -l -q test.C
+fit:
+	LD_LIBRARY_PATH=$LD_LIBRARY_PATH:/usr/local/lib/R/site-library/RInside/lib/ root -l -q CurveFit.C
 clean:
 	rm -f *~ libRInterface.so *Cint*
