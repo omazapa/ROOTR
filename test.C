@@ -20,19 +20,19 @@ r.assign(v,"v");
 r.assign(TString("ROOTR"),"str");
 r.assign(mat,"mat");
 cout<<"------------------------------\n";
-r.parseEvalQ("cat(v)");
+r.parse("cat(v)");
 cout<<"------------------------------\n";
-r.parseEvalQ("summary(v)");
+r.parse("summary(v)");
 cout<<"------------------------------\n";
-r.parseEvalQ("v<-2*v");
+r.parse("v<-2*v");
 cout<<"------------------------------\n";
-// r.parseEvalQ("M = matrix(c(2.1, 4.2, 3.3, 1.4, 5.5, 7.0),nrow=2,ncol=3)");
-// cout<<"------------------------------\n";
-// r.parseEvalQ("cat(M)");
+r.parse("M = matrix(c(2.1, 4.2, 3.3, 1.4, 5.5, 7.0),nrow=2,ncol=3)");
+cout<<"------------------------------\n";
+r.parse("cat(M)");
 cout<<"------------------------------\n";
 cout<<"mat = \n";
 mat.Print();
-r.parseEvalQ("mat");
+r.parse("mat");
 cout<<"------------------------------\n";
 
 
@@ -45,8 +45,8 @@ TVectorD vout=robj.toVector();
 cout<<"------------------------------\n";
 TArrayD aout=robj.toArray();
 cout<<"------------------------------\n";
-// robj=r.parseEval("M");
-// TMatrixD M=robj.toMatrix();
+robj=r.parseEval("M");
+TMatrixD M=robj.toMatrix();
 robj=r.parseEval("mat");
 TMatrixD rmat=robj.toMatrix();
 
@@ -56,12 +56,12 @@ cout<<"---\n";
 cout<<"["<<vout[0]<<","<<vout[1]<<","<<vout[2]<<"]"<<endl;
 cout<<"["<<aout[0]<<","<<aout[1]<<","<<aout[2]<<"]"<<endl;
 cout<<"---\n";
-// M.Print();
-// cout<<"---\n";
-// cout<<"Original mat\n";
-// mat.Print();
-// 
-// cout<<"Returned mat\n";
-// rmat.Print();
-// cout<<"---\n";
+M.Print();
+cout<<"---\n";
+cout<<"Original mat\n";
+mat.Print();
+
+cout<<"Returned mat\n";
+rmat.Print();
+cout<<"---\n";
 }

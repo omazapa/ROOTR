@@ -1,7 +1,7 @@
 #include "TRandom.h"
 #include "TMath.h"
 //Example take from http://www.itc.nl/~rossiter/teach/R/R_CurveFit.pdf
-//Please read the file while read this code.
+//Please read the file R_CurveFit.pdf while read this code.
 
 void CurveFit()
 {
