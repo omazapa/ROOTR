@@ -25,8 +25,7 @@ void CurveFit()
       x[i] = rg.Uniform(0,1);
       y[i] = TMath::Power(x[i],3) + rg.Gaus()*0.06;
     }
-   r["len"]=len;
-   
+   r.assign(len,"x"); 
    r.assign(TVectorD(len,x),"x"); 
    r.assign(TVectorD(len,y),"y");
    
