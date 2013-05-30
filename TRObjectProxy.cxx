@@ -14,15 +14,18 @@
 using namespace ROOT::R;
 ClassImp(TRObjectProxy)
 
+//______________________________________________________________________________
 TRObjectProxy::TRObjectProxy(SEXP xx): x(xx) { }
 
+//______________________________________________________________________________
 TString TRObjectProxy::toString()
 {
   return TString(::Rcpp::as<std::string>(x));
 }
 
+//______________________________________________________________________________
+void TRObjectProxy::operator=(SEXP xx)
+{
+  x=xx;
+}
 
-// template <> TRObjectProxy::operator TString()
-// {
-//   return TString(::Rcpp::as<std::string>(x));
-// }

@@ -1,3 +1,6 @@
+// @(#)root/r:$Id$
+// Author: Omar Zapata   29/05/2013
+
 /*************************************************************************
 * Copyright (C) 2013,  Gfif Developers                                   *
 * Grupo de Fenomenologia de Interacciones Fundamentales                  *
@@ -46,6 +49,7 @@ namespace ROOT
 	    TRObjectProxy(){};
 	    TRObjectProxy(SEXP xx);
 
+	    void operator=(SEXP xx);
 	    TString toString();
 	    template<class Type> Type toScalar();
 	    template<class Type> TVectorT<Type> toVector();
