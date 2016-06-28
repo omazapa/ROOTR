@@ -54,11 +54,6 @@ cout<<"---\n";
 cout<<str.Data()<<endl;
 cout<<"---\n";
 cout<<"["<<vout[0]<<","<<vout[1]<<","<<vout[2]<<"]"<<endl;
-cout<<"["<<aout[0]<<","<<aout[1]<<","<<aout[2]<<"]"<<endl;
-cout<<"---\n";
-M.Print();
-cout<<"---\n";
-cout<<"Original mat\n";
 mat.Print();
 
 cout<<"Returned mat\n";
